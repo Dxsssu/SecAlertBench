@@ -1,0 +1,16 @@
+model,prompt_tag,TPR,FPR,F1,valid_eval_count,TP,FP,TN,FN,file
+gpt-5.1-chat,cot,0.960000,0.472000,0.789474,500,240,118,132,10,/home/dongxunsu/AlertMeasurement/measurement/results/RQ2/Exp2/prompting/gpt-5.1-chat_cot.json
+gpt-5.1-chat,few_shot,0.928000,0.096000,0.916996,500,232,24,226,18,/home/dongxunsu/AlertMeasurement/measurement/results/RQ2/Exp2/prompting/gpt-5.1-chat_few_shot.json
+gpt-5.1-chat,one_shot,0.900000,0.224000,0.847458,500,225,56,194,25,/home/dongxunsu/AlertMeasurement/measurement/results/RQ2/Exp2/prompting/gpt-5.1-chat_one_shot.json
+gpt-5.1-chat,user-baseline,0.852000,0.332000,0.780220,500,213,83,167,37,/home/dongxunsu/AlertMeasurement/measurement/results/RQ2/Exp2/prompting/gpt-5.1-chat_user-baseline.json
+gpt-5.1-chat,zero_shot,0.964000,0.488000,0.786297,500,241,122,128,9,/home/dongxunsu/AlertMeasurement/measurement/results/RQ2/Exp2/prompting/gpt-5.1-chat_zero_shot.json
+kimi-k2-instruct-0905,cot,0.864000,0.100000,0.879837,500,216,25,225,34,/home/dongxunsu/AlertMeasurement/measurement/results/RQ2/Exp2/prompting/kimi-k2-instruct-0905_cot.json
+kimi-k2-instruct-0905,few_shot,0.876000,0.080000,0.895706,500,219,20,230,31,/home/dongxunsu/AlertMeasurement/measurement/results/RQ2/Exp2/prompting/kimi-k2-instruct-0905_few_shot.json
+kimi-k2-instruct-0905,one_shot,0.872000,0.112000,0.879032,500,218,28,222,32,/home/dongxunsu/AlertMeasurement/measurement/results/RQ2/Exp2/prompting/kimi-k2-instruct-0905_one_shot.json
+kimi-k2-instruct-0905,user-baseline,0.748000,0.092000,0.813043,500,187,23,227,63,/home/dongxunsu/AlertMeasurement/measurement/results/RQ2/Exp2/prompting/kimi-k2-instruct-0905_user-baseline.json
+kimi-k2-instruct-0905,zero_shot,0.848000,0.156000,0.846307,500,212,39,211,38,/home/dongxunsu/AlertMeasurement/measurement/results/RQ2/Exp2/prompting/kimi-k2-instruct-0905_zero_shot.json
+qwen3-30b-a3b-instruct-2507,cot,0.824000,0.460000,0.721541,500,206,115,135,44,/home/dongxunsu/AlertMeasurement/measurement/results/RQ2/Exp2/prompting/qwen3-30b-a3b-instruct-2507_cot.json
+qwen3-30b-a3b-instruct-2507,few_shot,0.908000,0.276000,0.831502,500,227,69,181,23,/home/dongxunsu/AlertMeasurement/measurement/results/RQ2/Exp2/prompting/qwen3-30b-a3b-instruct-2507_few_shot.json
+qwen3-30b-a3b-instruct-2507,one_shot,0.868000,0.472000,0.741880,500,217,118,132,33,/home/dongxunsu/AlertMeasurement/measurement/results/RQ2/Exp2/prompting/qwen3-30b-a3b-instruct-2507_one_shot.json
+qwen3-30b-a3b-instruct-2507,user-baseline,0.824000,0.508000,0.706690,500,206,127,123,44,/home/dongxunsu/AlertMeasurement/measurement/results/RQ2/Exp2/prompting/qwen3-30b-a3b-instruct-2507_user-baseline.json
+qwen3-30b-a3b-instruct-2507,zero_shot,0.792000,0.564000,0.672326,500,198,141,109,52,/home/dongxunsu/AlertMeasurement/measurement/results/RQ2/Exp2/prompting/qwen3-30b-a3b-instruct-2507_zero_shot.json

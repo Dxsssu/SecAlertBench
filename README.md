@@ -8,9 +8,12 @@ Enterprise security operations centers (SOCs) are heavily affected by alert fati
 
 ## Repository Structure
 
+This repository is organized into four main parts: `0x01` provides representative raw SOC alert examples, `0x02` contains the processed SecAlertBench dataset, `0x03` provides the evaluation scripts, and `0x04` stores the released evaluation results.
+
 ```text
 SecAlertBench/
 ├── README.md
+├── requirements.txt
 ├── 0x01. Representative Raw SOC Alert Examples/
 │   ├── enterprise_a_examples.json
 │   ├── enterprise_b_examples.json
@@ -21,40 +24,19 @@ SecAlertBench/
 │   └── secalertbench_non_attack.json
 ├── 0x03. Evaluation Scripts/
 │   ├── RQ1/
-│   │   ├── run_rq1_api_test_eval.py
-│   │   ├── run_rq1_transformers_test_eval.py
-│   │   └── stats_rq1_summary_metrics.py
 │   ├── RQ2/
 │   │   ├── Exp1/
-│   │   │   ├── run_rq2_api_consistency_eval.py
-│   │   │   └── run_rq2_transformers_consistency_eval.py
 │   │   ├── Exp2/
-│   │   │   └── run_rq2_api_reasoning_correctness_eval.py
-│   │   ├── Exp3/
-│   │   │   ├── prompting/
-│   │   │   │   ├── run_rq2_api_config_experiment_cot_eval.py
-│   │   │   │   ├── run_rq2_api_config_experiment_few_shot_eval.py
-│   │   │   │   ├── run_rq2_api_config_experiment_one_shot_eval.py
-│   │   │   │   ├── run_rq2_api_config_experiment_user_baseline_eval.py
-│   │   │   │   ├── run_rq2_api_config_experiment_zero_shot_eval.py
-│   │   │   │   ├── run_rq2_transformers_config_experiment_cot_eval.py
-│   │   │   │   ├── run_rq2_transformers_config_experiment_few_shot_eval.py
-│   │   │   │   ├── run_rq2_transformers_config_experiment_one_shot_eval.py
-│   │   │   │   ├── run_rq2_transformers_config_experiment_user_baseline_eval.py
-│   │   │   │   ├── run_rq2_transformers_config_experiment_zero_shot_eval.py
-│   │   │   │   └── stats_rq2_prompting_metrics.py
-│   │   │   ├── quantization/
-│   │   │   │   ├── run_rq2_transformers_quantization_experiment_zero_shot_eval.py
-│   │   │   │   └── stats_rq2_quantization_metrics.py
-│   │   │   └── sampling/
-│   │   │       ├── run_rq2_api_sampling_experiment_zero_shot_eval.py
-│   │   │       └── stats_rq2_sampling_tpr_fpr.py
 │   │   └── Exp4/
-│   │       └── stats_rq2_exp4_rule_name_metrics.py
 │   └── RQ3/
-│       ├── run_rq3_transformers_latency_eval.py
-│       └── stats_rq3_latency_results.py
 └── 0x04. Evaluation Results/
+    ├── RQ1/
+    ├── RQ2/
+    │   ├── Exp1/
+    │   ├── Exp2/
+    │   ├── Exp3/
+    │   └── Exp4/
+    └── RQ3/
 ```
 
 ## 0x01. Representative Raw SOC Alert Examples
@@ -96,10 +78,43 @@ An example record is shown below:
 
 ## 0x03. Evaluation Scripts
 
-The evaluation scripts are stored in [`0x03. Evaluation Scripts/`](./0x03.%20Evaluation%20Scripts/). They are organized according to the research questions in the paper and can be used to reproduce the main experiments on SecAlertBench. All scripts have been cleaned for artifact release: model names or paths, API endpoints, API keys, dataset paths, output directories, and log directories should be provided by users through command-line arguments instead of relying on hard-coded local paths.
+The evaluation scripts are stored in [`0x03. Evaluation Scripts/`](./0x03.%20Evaluation%20Scripts/). They are organized by research question and provide the code needed to reproduce the experiments on SecAlertBench. The released scripts have been cleaned for artifact use: model names or paths, API endpoints, API keys, dataset paths, output directories, and log directories should be supplied through command-line arguments instead of hard-coded local paths.
 
-`RQ1` contains the main Tier-1 alert triage evaluation scripts for API-based LLMs and local Hugging Face/Transformers models. The scripts take the Attack and Non-Attack dataset splits as input, construct prompts from the complete alert record fields, collect model predictions, and compute summary metrics such as TPR, FPR, precision, and F1-score.
+`RQ1` contains the main Tier-1 alert triage evaluation scripts. [`run_rq1_api_test_eval.py`](./0x03.%20Evaluation%20Scripts/RQ1/run_rq1_api_test_eval.py) evaluates API-based LLMs, [`run_rq1_transformers_test_eval.py`](./0x03.%20Evaluation%20Scripts/RQ1/run_rq1_transformers_test_eval.py) evaluates local Hugging Face/Transformers models, and [`stats_rq1_summary_metrics.py`](./0x03.%20Evaluation%20Scripts/RQ1/stats_rq1_summary_metrics.py) summarizes the resulting TPR, FPR, precision, and F1-score.
 
-`RQ2` contains scripts for analyzing LLM behavior under different experimental settings. `Exp1` evaluates decision consistency, `Exp2` evaluates reasoning correctness with chain-of-thought style outputs, `Exp3` contains configuration experiments for prompting strategies, quantization, and sampling settings, and `Exp4` summarizes rule-name-level performance based on RQ1 outputs.
+For example, the RQ1 API-based evaluation script can be run with a `uv` environment as follows. Replace the API endpoint, API key, model name, and output paths with your own settings.
 
-`RQ3` contains scripts for local model latency and GPU-memory profiling. The latency script supports both a single model through `--model` or `--model-path` and multiple models through `--model-paths`. Similar to RQ1, it constructs prompts using the complete alert record fields and requires users to specify dataset, output, and log paths explicitly.
+```bash
+cd /home/dongxunsu/SecAlertBench
+
+uv venv
+uv pip install -r requirements.txt
+
+uv run python "0x03. Evaluation Scripts/RQ1/run_rq1_api_test_eval.py" \
+  --url "https://api.example.com/v1/chat/completions" \
+  --api-key "YOUR_API_KEY" \
+  --model "YOUR_MODEL_NAME" \
+  --attack-data "0x02. Processed SecAlertBench Dataset/secalertbench_attack.json" \
+  --fp-data "0x02. Processed SecAlertBench Dataset/secalertbench_non_attack.json" \
+  --sample-per-class 1000 \
+  --seed 42 \
+  --threads 40 \
+  --timeout 60 \
+  --retry-times 10 \
+  --out-dir "outputs/rq1_api" \
+  --log-dir "logs/rq1_api"
+```
+
+`RQ2` contains scripts for analyzing model behavior under the paper's experiment organization. `Exp1` corresponds to Response Determinism, `Exp2` corresponds to Configuration Sensitivity, and `Exp4` corresponds to Alert-Type Generalization. The released result files for `Exp3` Reasoning Correctness are provided in `0x04. Evaluation Results/`.
+
+`RQ3` contains scripts for local model latency and GPU-memory profiling. [`run_rq3_transformers_latency_eval.py`](./0x03.%20Evaluation%20Scripts/RQ3/run_rq3_transformers_latency_eval.py) supports a single model through `--model` or `--model-path` and multiple models through `--model-paths`; [`stats_rq3_latency_results.py`](./0x03.%20Evaluation%20Scripts/RQ3/stats_rq3_latency_results.py) summarizes latency and resource-usage statistics.
+
+## 0x04. Evaluation Results
+
+The evaluation results are stored in [`0x04. Evaluation Results/`](./0x04.%20Evaluation%20Results/). This directory contains the released outputs corresponding to the experiments in the paper, including model prediction files, metric summaries, configuration-experiment results, reasoning-judge summaries, and latency profiling records.
+
+`RQ1/` stores the main alert-triage prediction results for the evaluated models. Each model has a JSON result file, and these files can be used with the RQ1 statistics script to reproduce the main TPR, FPR, precision, and F1-score summaries.
+
+`RQ2/` stores behavior-analysis results across four experiment groups that follow the paper terminology. `Exp1/` is Response Determinism and contains decision-consistency results under different temperature settings. `Exp2/` is Configuration Sensitivity and contains prompting, quantization, and sampling configuration results. `Exp3/` is Reasoning Correctness and contains reasoning-judge results with the corresponding summary CSV. `Exp4/` is Alert-Type Generalization and contains alert-type-level metric summaries.
+
+`RQ3/` stores latency and resource-usage profiling outputs for selected Qwen models under zero-shot, few-shot, and CoT prompting settings. The directory includes per-run JSON summaries, per-sample latency CSV files, and selected Qwen latency summary files.

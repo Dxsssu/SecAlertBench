@@ -1,0 +1,5 @@
+model,prediction_correct_reasoning_correct,prediction_correct_reasoning_incorrect,prediction_incorrect_reasoning_correct,prediction_incorrect_reasoning_incorrect,missing_or_unknown_reasoning_result,invalid_prediction_or_label,effective_total,total
+Foundation-Sec-8B-Instruct,203,149,46,102,0,0,500,500
+gpt-5.1-chat,323,49,116,12,0,0,500,500
+kimi-k2-instruct-0905,316,125,49,10,0,0,500,500
+qwen3-30b-a3b-instruct-2507,277,64,96,63,0,0,500,500
